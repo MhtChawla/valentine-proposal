@@ -1,129 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>For You 💗</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            position: relative;
+        }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+        /* Animated hearts background */
+        .heart-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
 
-body{
-  height:100vh;
-  font-family:Poppins,sans-serif;
-  background:linear-gradient(180deg,#ffd6e3,#ffb6c9);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: float 6s infinite;
+        }
 
-.card{
-  background:#fff;
-  width:90%;
-  max-width:360px;
-  padding:40px 30px;
-  border-radius:22px;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(255,105,135,.25);
-}
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-h1{
-  font-size:1.6rem;
-  color:#ff4f7b;
-  margin-bottom:12px;
-}
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            animation: fadeIn 0.8s ease-in;
+        }
 
-p{
-  font-size:.95rem;
-  color:#666;
-  margin-bottom:28px;
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-.buttons{
-  position:relative;
-  height:90px;
-}
+        .emoji {
+            font-size: 80px;
+            animation: pulse 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
 
-button{
-  padding:12px 28px;
-  border-radius:30px;
-  border:none;
-  font-size:.9rem;
-  cursor:pointer;
-  transition:.2s ease;
-  position:absolute;
-}
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
 
-#yes{
-  background:#ff4f7b;
-  color:white;
-  left:50%;
-  transform:translateX(-110%);
-}
+        h1 {
+            font-size: 36px;
+            color: #d63384;
+            margin: 20px 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-#yes:hover{
-  opacity:.9;
-}
+        .message {
+            font-size: 18px;
+            color: #555;
+            margin: 20px 0 40px;
+            line-height: 1.6;
+        }
 
-#no{
-  background:#f3f3f3;
-  color:#777;
-  left:50%;
-  transform:translateX(10%);
-}
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 80px;
+        }
 
-.final{
-  display:none;
-  flex-direction:column;
-  align-items:center;
-}
+        button {
+            padding: 18px 45px;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-family: inherit;
+        }
 
-.final span{
-  font-size:3rem;
-}
+        #yesBtn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
 
-.final h2{
-  margin-top:14px;
-  font-weight:500;
-  color:#ff4f7b;
-}
-</style>
+        #yesBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        #yesBtn:active {
+            transform: scale(0.98);
+        }
+
+        #noBtn {
+            background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+            color: #666;
+            position: absolute;
+            transition: all 0.2s ease;
+        }
+
+        #noBtn:hover {
+            background: linear-gradient(135deg, #d0d0d0 0%, #b0b0b0 100%);
+        }
+
+        /* Success page styles */
+        .success-container {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .success-container.active {
+            display: block;
+        }
+
+        .success-emoji {
+            font-size: 100px;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .success-container h1 {
+            font-size: 42px;
+            margin: 30px 0;
+        }
+
+        .success-message {
+            font-size: 24px;
+            color: #d63384;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .success-submessage {
+            font-size: 18px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f093fb;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Animated hearts background -->
+    <div class="heart-bg" id="heartBg"></div>
 
-<div class="card" id="card">
-  <h1>It’s Valentine Month 💗</h1>
-  <p>Will you be my Valentine, Tashu?</p>
+    <div class="container">
+        <!-- Question page -->
+        <div id="questionPage">
+            <div class="emoji">💝</div>
+            <h1>Will You Be My Valentine?</h1>
+            <p class="message">
+                I've been thinking about this for a while... and I can't imagine celebrating this day with anyone else but you. 
+                So, what do you say? 💕
+            </p>
+            <div class="button-container">
+                <button id="yesBtn">Yes! 💖</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
 
-  <div class="buttons">
-    <button id="yes">Yes 💕</button>
-    <button id="no">No 🥲</button>
-  </div>
-</div>
+        <!-- Success page -->
+        <div id="successPage" class="success-container">
+            <div class="success-emoji">🎉💖✨</div>
+            <h1>Yayyy! 🥳</h1>
+            <p class="success-message">*ABC</p>
+            <p class="success-submessage">
+                I'm so happy you said yes! This Valentine's Day is going to be special. 💕
+            </p>
+        </div>
+    </div>
 
-<div class="card final" id="final">
-  <span>❤️</span>
-  <h2>ABC</h2>
-</div>
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const heartBg = document.getElementById('heartBg');
+            const heartSymbols = ['💖', '💕', '💗', '💓', '💝', '💘'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heartBg.appendChild(heart);
+            }
+        }
 
-<script>
-const no=document.getElementById("no");
-const yes=document.getElementById("yes");
-const card=document.getElementById("card");
-const final=document.getElementById("final");
+        createHearts();
 
-no.addEventListener("mouseenter",()=>{
-  const x=Math.random()*120-60;
-  no.style.transform=`translate(${x}px,0)`;
-});
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const questionPage = document.getElementById('questionPage');
+        const successPage = document.getElementById('successPage');
 
-yes.onclick=()=>{
-  card.style.display="none";
-  final.style.display="flex";
-};
-</script>
+        // No button moves away on hover/touch
+        let noBtnMoving = false;
 
+        function moveNoButton() {
+            if (noBtnMoving) return;
+            noBtnMoving = true;
+
+            const container = document.querySelector('.button-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // Random position within container bounds
+            const maxX = containerRect.width - noBtn.offsetWidth - 40;
+            const maxY = 40; // Limited vertical movement
+            
+            const randomX = Math.random() * maxX - maxX/2;
+            const randomY = (Math.random() - 0.5) * maxY;
+            
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            
+            setTimeout(() => {
+                noBtnMoving = false;
+            }, 300);
+        }
+
+        noBtn.addEventListener('mouseenter', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // Prevent clicking No button
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // Yes button functionality
+        yesBtn.addEventListener('click', () => {
+            questionPage.style.display = 'none';
+            successPage.classList.add('active');
+            createConfetti();
+        });
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#ffd700', '#ff69b4'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+    </script>
 </body>
 </html>
