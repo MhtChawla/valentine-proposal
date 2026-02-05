@@ -313,6 +313,9 @@
         }
     </style>
 </head>
+<audio id="tryAgainSound" src="try-again.mp3"></audio>
+<audio id="landingMusic" src="landing-music.mp3" loop></audio>
+<audio id="yesMusic" src="yes-music.mp3"></audio>
 <body>
     <!-- Floating emojis background -->
     <div id="floating-container"></div>
@@ -339,7 +342,7 @@
 
         <!-- Success Screen -->
         <div class="success-screen" id="successScreen">
-            <h1>🎉 Yayyyy! 🎉</h1>
+            <h2>🎉 Yayyyy! 🎉</h2>
             <div class="heart-burst">❤️ 💕 💖 💗 💓 💝</div>
             <p class="success-message">
                 *ABC
@@ -393,14 +396,35 @@
 
         // YES button - show success screen with celebration
         yesBtn.addEventListener('click', () => {
-            // Create burst of emojis
+            // Stop landing music
+            landingMusic.pause();
+            landingMusic.currentTime = 0;
+        
+            // Play YES music
+            yesMusic.volume = 0.7;
+            yesMusic.play();
+        
             createCelebrationBurst();
-            
+        
             setTimeout(() => {
                 questionScreen.style.display = 'none';
                 successScreen.style.display = 'block';
             }, 300);
         });
+
+        const landingMusic = document.getElementById('landingMusic');
+        const tryAgainSound = document.getElementById('tryAgainSound');
+        const yesMusic = document.getElementById('yesMusic');
+        
+        let musicStarted = false;
+
+        document.addEventListener('click', () => {
+        if (!musicStarted) {
+                landingMusic.volume = 0.5;
+                landingMusic.play();
+                musicStarted = true;
+            }
+        }, { once: true });
 
         function createCelebrationBurst() {
             const burstEmojis = ['💕', '💖', '💗', '❤️', '✨', '🎉', '🎊'];
@@ -431,25 +455,30 @@
 
         // NO button - move away on hover/touch with more dramatic effect
         function moveNoButton() {
-            const container = document.querySelector('.button-container');
-            const containerRect = container.getBoundingClientRect();
-            
-            // Calculate random position - make it move further away
-            const maxX = window.innerWidth - noBtn.offsetWidth - 50;
-            const maxY = window.innerHeight - noBtn.offsetHeight - 50;
-            
+            // Play try-again sound
+            tryAgainSound.currentTime = 0;
+            tryAgainSound.play();
+        
+            // Mobile vibration (works on most Android devices)
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+        
+            const maxX = window.innerWidth - noBtn.offsetWidth - 40;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 40;
+        
             const randomX = Math.random() * maxX;
             const randomY = Math.random() * maxY;
-            
-            // Make the button shake before moving
+        
+            // Shake effect before escape
             noBtn.style.animation = 'shake 0.3s';
-            
+        
             setTimeout(() => {
                 noBtn.style.position = 'fixed';
                 noBtn.style.left = randomX + 'px';
                 noBtn.style.top = randomY + 'px';
                 noBtn.style.animation = '';
-            }, 10);
+            }, 30);
         }
 
         // Add shake animation
