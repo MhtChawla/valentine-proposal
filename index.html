@@ -205,6 +205,12 @@
             overflow: hidden;
         }
 
+        .button-container {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
         #yesBtn::before {
             content: '✨';
             position: absolute;
@@ -284,6 +290,37 @@
             50% { transform: rotate(10deg); }
         }
 
+        #tapOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 105, 180, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .tap-text {
+            font-size: 2em;
+            font-weight: 700;
+            animation: pulse 1.2s infinite;
+        }
+        
+        .countdown {
+            font-size: 4em;
+            font-weight: 800;
+            margin-top: 20px;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.85; }
+        }
+
         /* Responsive design */
         @media (max-width: 600px) {
             h1 {
@@ -320,6 +357,11 @@
     <!-- Floating emojis background -->
     <div id="floating-container"></div>
     <div id="sparkles-container"></div>
+
+    <div id="tapOverlay">
+        <div class="tap-text">Tap to start music 🎵</div>
+        <div class="countdown" id="countdown"></div>
+    </div>
 
     <div class="container">
         <!-- Question Screen -->
@@ -418,12 +460,32 @@
         
         let musicStarted = false;
 
-        document.addEventListener('click', () => {
-        if (!musicStarted) {
-                landingMusic.volume = 0.5;
+        const tapOverlay = document.getElementById('tapOverlay');
+        const countdownEl = document.getElementById('countdown');
+
+        tapOverlay.addEventListener('click', () => {
+                // Start landing music at 40%
+                landingMusic.volume = 0.4;
                 landingMusic.play();
-                musicStarted = true;
-            }
+            
+                let count = 3;
+                countdownEl.textContent = count;
+            
+                const timer = setInterval(() => {
+                    count--;
+                    countdownEl.textContent = count;
+            
+                    if (count === 0) {
+                        clearInterval(timer);
+            
+                        tapOverlay.style.display = 'none';
+            
+                        // Show buttons
+                        const btnContainer = document.querySelector('.button-container');
+                        btnContainer.style.opacity = '1';
+                        btnContainer.style.pointerEvents = 'auto';
+                    }
+                }, 1000);
         }, { once: true });
 
         function createCelebrationBurst() {
