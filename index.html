@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💝 A Special Question For You 💝</title>
+    <title>💖✨ For Tashu ✨💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,48 +13,85 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(45deg, #ff6b9d, #c06c84, #f67280, #ffa8c5, #ff6b9d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             overflow: hidden;
             position: relative;
         }
 
-        /* Floating hearts animation */
-        .heart {
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating hearts and emojis */
+        .floating-emoji {
             position: absolute;
-            font-size: 30px;
-            animation: float 15s infinite;
-            opacity: 0.6;
+            font-size: 40px;
+            animation: float 12s infinite;
+            opacity: 0.7;
+            pointer-events: none;
         }
 
         @keyframes float {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(100vh) rotate(0deg) scale(0);
                 opacity: 0;
             }
-            50% {
-                opacity: 0.6;
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
             }
             100% {
-                transform: translateY(-100vh) rotate(360deg);
+                transform: translateY(-100vh) rotate(720deg) scale(1);
                 opacity: 0;
             }
         }
 
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkleAnimation 2s infinite;
+            box-shadow: 0 0 10px white;
+        }
+
+        @keyframes sparkleAnimation {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 50px 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.95));
+            padding: 60px 50px;
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(255, 0, 100, 0.4), 
+                        0 0 0 10px rgba(255, 255, 255, 0.3),
+                        0 0 0 20px rgba(255, 192, 203, 0.2);
             text-align: center;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             position: relative;
             z-index: 10;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            animation: containerPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes containerPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .question-screen {
@@ -64,166 +102,275 @@
             display: none;
         }
 
-        h1 {
-            color: #e91e63;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        .emoji-header {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: spin 3s linear infinite;
         }
 
-        .emoji {
-            font-size: 80px;
-            margin: 20px 0;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(45deg, #ff0066, #ff6b9d, #ff0099, #ff3399);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: gradientText 4s ease infinite;
+            text-shadow: 2px 2px 20px rgba(255, 0, 102, 0.3);
+            line-height: 1.3;
+        }
+
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .emoji-row {
+            font-size: 50px;
+            margin: 25px 0;
             animation: bounce 2s infinite;
+            letter-spacing: 10px;
         }
 
         @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .question {
-            font-size: 1.5em;
-            color: #333;
-            margin: 30px 0;
+            font-size: 1.8em;
+            color: #d63384;
+            margin: 35px 0 20px 0;
             line-height: 1.6;
+            font-weight: 600;
+        }
+
+        .subtext {
+            font-size: 1.2em;
+            color: #e75480;
+            margin: 15px 0 35px 0;
+            font-style: italic;
+            font-weight: 500;
         }
 
         .button-container {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 45px;
             position: relative;
-            min-height: 60px;
+            min-height: 70px;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 15px 50px;
-            font-size: 1.2em;
+            padding: 20px 60px;
+            font-size: 1.4em;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            font-family: 'Poppins', sans-serif;
         }
 
         #yesBtn {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #ff0066, #ff6b9d, #ff3399);
+            background-size: 200% 200%;
             color: white;
+            animation: yesButtonGlow 2s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #yesBtn::before {
+            content: '✨';
+            position: absolute;
+            font-size: 20px;
+            animation: sparkleMove 1s infinite;
+        }
+
+        @keyframes yesButtonGlow {
+            0%, 100% { 
+                box-shadow: 0 8px 25px rgba(255, 0, 102, 0.5);
+                background-position: 0% 50%;
+            }
+            50% { 
+                box-shadow: 0 8px 35px rgba(255, 0, 102, 0.8);
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes sparkleMove {
+            0% { left: -20px; opacity: 0; }
+            50% { opacity: 1; }
+            100% { left: 110%; opacity: 0; }
         }
 
         #yesBtn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+            transform: scale(1.15);
+            box-shadow: 0 12px 40px rgba(255, 0, 102, 0.6);
         }
 
         #noBtn {
-            background: linear-gradient(135deg, #a8a8a8 0%, #7f7f7f 100%);
+            background: linear-gradient(135deg, #9c9c9c, #6b6b6b);
             color: white;
             position: absolute;
         }
 
         .success-screen h1 {
-            color: #4CAF50;
+            color: #ff0066;
         }
 
         .success-message {
-            font-size: 1.3em;
-            color: #333;
+            font-size: 1.5em;
+            color: #d63384;
             line-height: 1.8;
-            margin: 30px 0;
+            margin: 35px 0;
+            font-weight: 600;
         }
 
         .heart-burst {
-            font-size: 50px;
+            font-size: 70px;
             animation: burst 1s ease-out;
+            margin: 25px 0;
+            letter-spacing: 15px;
         }
 
         @keyframes burst {
             0% {
-                transform: scale(0);
+                transform: scale(0) rotate(0deg);
                 opacity: 0;
             }
             50% {
-                transform: scale(1.2);
+                transform: scale(1.3) rotate(180deg);
                 opacity: 1;
             }
             100% {
-                transform: scale(1);
+                transform: scale(1) rotate(360deg);
                 opacity: 1;
             }
+        }
+
+        .celebration-emoji {
+            font-size: 100px;
+            animation: celebrate 1.5s infinite;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
         }
 
         /* Responsive design */
         @media (max-width: 600px) {
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
             
             .question {
-                font-size: 1.2em;
+                font-size: 1.4em;
+            }
+
+            .subtext {
+                font-size: 1em;
             }
             
             button {
-                padding: 12px 35px;
-                font-size: 1em;
+                padding: 15px 40px;
+                font-size: 1.1em;
+            }
+
+            .emoji-row {
+                font-size: 35px;
+            }
+
+            .container {
+                padding: 40px 30px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Floating hearts background -->
-    <div id="hearts-container"></div>
+    <!-- Floating emojis background -->
+    <div id="floating-container"></div>
+    <div id="sparkles-container"></div>
 
     <div class="container">
         <!-- Question Screen -->
         <div class="question-screen" id="questionScreen">
-            <h1>💝 Happy Valentine's Week! 💝</h1>
-            <div class="emoji">🌹</div>
+            <div class="emoji-header">💝</div>
+            <h1>It's Valentine<br>Month! 💕✨</h1>
+            <div class="emoji-row">🌹 💖 🌹</div>
             <p class="question">
-                Will you be my Valentine?
+                Will you be My Valentine, Tashu? 💘
+            </p>
+            <div class="emoji-row" style="font-size: 40px;"> 🐼 😘 </div>
+            <p class="subtext">
+                Weren't you trying to say NO the other day? Go ahead, you can try harder!
             </p>
             <div class="button-container">
                 <button id="yesBtn">Yes! 💕</button>
-                <button id="noBtn">No</button>
+                <button id="noBtn">No 😢</button>
             </div>
         </div>
 
         <!-- Success Screen -->
         <div class="success-screen" id="successScreen">
-            <h1>🎉 Yay! 🎉</h1>
-            <div class="heart-burst">❤️ 💕 💖 💗 💓</div>
+            <h1>🎉 Yayyyy! 🎉</h1>
+            <div class="heart-burst">❤️ 💕 💖 💗 💓 💝</div>
             <p class="success-message">
                 *ABC
             </p>
-            <div class="emoji">😍</div>
+            <div class="celebration-emoji">😍</div>
+            <div class="emoji-row" style="font-size: 45px;">✨ 🌟 💫 ⭐ ✨</div>
         </div>
     </div>
 
+
     <script>
-        // Create floating hearts
-        function createFloatingHearts() {
-            const heartsContainer = document.getElementById('hearts-container');
-            const heartSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝'];
+        // Create overwhelming floating emojis
+        function createFloatingEmojis() {
+            const floatingContainer = document.getElementById('floating-container');
+            const emojiSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '💞', '💌', '🌹', '🌺', '🌸', '🌷', '✨', '💫', '⭐', '🌟', '💐', '🎀', '🦋', '🥰', '😍', '😘', '💋', '🎁'];
             
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 15 + 's';
-                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                heartsContainer.appendChild(heart);
+            for (let i = 0; i < 40; i++) {
+                const emoji = document.createElement('div');
+                emoji.classList.add('floating-emoji');
+                emoji.textContent = emojiSymbols[Math.floor(Math.random() * emojiSymbols.length)];
+                emoji.style.left = Math.random() * 100 + '%';
+                emoji.style.animationDelay = Math.random() * 12 + 's';
+                emoji.style.animationDuration = (Math.random() * 8 + 8) + 's';
+                emoji.style.fontSize = (Math.random() * 30 + 25) + 'px';
+                floatingContainer.appendChild(emoji);
             }
         }
 
-        createFloatingHearts();
+        // Create sparkles
+        function createSparkles() {
+            const sparklesContainer = document.getElementById('sparkles-container');
+            
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparklesContainer.appendChild(sparkle);
+            }
+        }
+
+        createFloatingEmojis();
+        createSparkles();
 
         // Button functionality
         const yesBtn = document.getElementById('yesBtn');
@@ -231,27 +378,77 @@
         const questionScreen = document.getElementById('questionScreen');
         const successScreen = document.getElementById('successScreen');
 
-        // YES button - show success screen
+        // YES button - show success screen with celebration
         yesBtn.addEventListener('click', () => {
-            questionScreen.style.display = 'none';
-            successScreen.style.display = 'block';
+            // Create burst of emojis
+            createCelebrationBurst();
+            
+            setTimeout(() => {
+                questionScreen.style.display = 'none';
+                successScreen.style.display = 'block';
+            }, 300);
         });
 
-        // NO button - move away on hover/touch
+        function createCelebrationBurst() {
+            const burstEmojis = ['💕', '💖', '💗', '❤️', '✨', '🎉', '🎊'];
+            for (let i = 0; i < 30; i++) {
+                const emoji = document.createElement('div');
+                emoji.style.position = 'fixed';
+                emoji.style.left = '50%';
+                emoji.style.top = '50%';
+                emoji.style.fontSize = '30px';
+                emoji.style.zIndex = '1000';
+                emoji.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+                
+                const angle = (Math.PI * 2 * i) / 30;
+                const velocity = 200 + Math.random() * 200;
+                
+                emoji.animate([
+                    { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+                    { transform: `translate(calc(-50% + ${Math.cos(angle) * velocity}px), calc(-50% + ${Math.sin(angle) * velocity}px)) scale(1)`, opacity: 0 }
+                ], {
+                    duration: 1000,
+                    easing: 'cubic-bezier(0, .9, .57, 1)'
+                });
+                
+                document.body.appendChild(emoji);
+                setTimeout(() => emoji.remove(), 1000);
+            }
+        }
+
+        // NO button - move away on hover/touch with more dramatic effect
         function moveNoButton() {
             const container = document.querySelector('.button-container');
             const containerRect = container.getBoundingClientRect();
             
-            // Calculate random position within container
-            const maxX = containerRect.width - noBtn.offsetWidth;
-            const maxY = containerRect.height - noBtn.offsetHeight;
+            // Calculate random position - make it move further away
+            const maxX = window.innerWidth - noBtn.offsetWidth - 50;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 50;
             
             const randomX = Math.random() * maxX;
             const randomY = Math.random() * maxY;
             
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
+            // Make the button shake before moving
+            noBtn.style.animation = 'shake 0.3s';
+            
+            setTimeout(() => {
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+                noBtn.style.animation = '';
+            }, 300);
         }
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
 
         // Handle both mouse and touch events
         noBtn.addEventListener('mouseenter', moveNoButton);
