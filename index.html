@@ -583,33 +583,42 @@
         const progress = document.getElementById('progressFill');
     
         let step = 0;
-    
+
         const steps = [
             { text: 'Tashu', width: '30%' },
             { text: 'My Tashu', width: '65%' },
             { text: 'My Tashu 💖', width: '100%' }
         ];
-    
-        const interval = setInterval(() => {
-            loaderText.style.opacity = 0;
-    
-            setTimeout(() => {
-                loaderText.textContent = steps[step].text;
-                progress.style.width = steps[step].width;
-                loaderText.style.opacity = 1;
-                step++;
-    
-                if (step === steps.length) {
-                    clearInterval(interval);
-    
-                    setTimeout(() => {
-                        document.getElementById('loveLoader').style.display = 'none';
-                        successScreen.style.display = 'block';
-                        createCelebrationBurst();
-                    }, 600);
-                }
-            }, 400);
-        }, 900);
+        
+        function updateLoader() {
+            if (step >= steps.length) {
+                setTimeout(() => {
+                    document.getElementById('loveLoader').style.display = 'none';
+                    successScreen.style.display = 'block';
+                    createCelebrationBurst();
+                }, 500);
+                return;
+            }
+        
+            loaderText.style.opacity = '0';
+            loaderText.style.transform = 'scale(0.95)';
+        
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    loaderText.textContent = steps[step].text;
+                    progress.style.width = steps[step].width;
+        
+                    loaderText.style.opacity = '1';
+                    loaderText.style.transform = 'scale(1)';
+        
+                    step++;
+                    setTimeout(updateLoader, 700);
+                }, 200);
+            });
+        }
+        
+        updateLoader();
+      
     });
 
         const landingMusic = document.getElementById('landingMusic');
