@@ -65,6 +65,8 @@
             align-items: center;
             justify-content: center;
             z-index: 99999;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
         
         .loader-box {
@@ -132,6 +134,7 @@
             z-index: 10;
             border: 3px solid rgba(255, 255, 255, 0.6);
             animation: containerPulse 3s ease-in-out infinite;
+            will-change: transform;
             /* transform: scale(0.85);
             transform-origin: center; */
         }
@@ -453,6 +456,11 @@
             .container {
                 overflow: visible !important;
             }
+
+            /* Do if the loader still glitchy on mobscreen */
+            /* .container {
+                animation: none;
+            } */
         }
     </style>
 </head>
