@@ -120,7 +120,7 @@
 
         .container {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.95));
-            padding: 60px 50px;
+            padding: 45px 40px;
             border-radius: 40px;
             box-shadow: 0 30px 80px rgba(255, 0, 100, 0.4), 
                         0 0 0 10px rgba(255, 255, 255, 0.3),
@@ -175,6 +175,20 @@
         }
         
         h2 {
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(45deg, #ff0066, #ff6b9d, #ff0099, #ff3399);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: gradientText 4s ease infinite;
+            text-shadow: 2px 2px 20px rgba(255, 0, 102, 0.3);
+            line-height: 1.3;
+        }
+
+         h3 {
             font-family: 'Pacifico', cursive;
             background: linear-gradient(45deg, #ff0066, #ff6b9d, #ff0099, #ff3399);
             background-size: 300% 300%;
@@ -414,7 +428,7 @@
         <!-- Question Screen -->
         <div class="question-screen" id="questionScreen">
             <div class="emoji-header">💝</div>
-            <h2>It's Valentine Month! 💕✨</h2>
+            <h3>It's Valentine Month! 💕✨</h3>
             <div class="emoji-row" style="font-size: 20px;">🌹 💖 🌹</div>
             <p class="question">
                 Will you be My Valentine, Tashu? 💘
