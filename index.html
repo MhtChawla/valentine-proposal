@@ -57,6 +57,51 @@
             }
         }
 
+        #loveLoader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #ff6b9d, #ffb6c1);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+        }
+        
+        .loader-box {
+            text-align: center;
+            color: white;
+        }
+        
+        #loaderText {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            transition: all 0.6s ease;
+        }
+        
+        .progress-bar {
+            width: 280px;
+            height: 14px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: white;
+            border-radius: 20px;
+            transition: width 0.4s ease;
+        }
+        
+        .loader-sub {
+            margin-top: 20px;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
         /* Sparkles */
         .sparkle {
             position: absolute;
@@ -87,8 +132,8 @@
             z-index: 10;
             border: 3px solid rgba(255, 255, 255, 0.6);
             animation: containerPulse 3s ease-in-out infinite;
-            transform: scale(0.85);
-            transform-origin: center;
+            /* transform: scale(0.85);
+            transform-origin: center; */
         }
 
         @keyframes containerPulse {
@@ -361,7 +406,7 @@
     <div id="sparkles-container"></div>
 
     <div id="tapOverlay">
-        <div class="tap-text">Tap to enter!🐼 </div>
+        <div class="tap-text">Tap to enter! 🐼 </div>
         <div class="countdown" id="countdown"></div>
     </div>
 
@@ -440,21 +485,47 @@
 
         // YES button - show success screen with celebration
         yesBtn.addEventListener('click', () => {
-            // Stop landing music
-            landingMusic.pause();
-            landingMusic.currentTime = 0;
-        
-            // Play YES music
-            yesMusic.volume = 0.7;
-            yesMusic.play();
-        
-            createCelebrationBurst();
-        
+        landingMusic.pause();
+        landingMusic.currentTime = 0;
+    
+        yesMusic.volume = 0.7;
+        yesMusic.play();
+    
+        questionScreen.style.display = 'none';
+        document.getElementById('loveLoader').style.display = 'flex';
+    
+        const loaderText = document.getElementById('loaderText');
+        const progress = document.getElementById('progressFill');
+    
+        let step = 0;
+    
+        const steps = [
+            { text: 'Tashu', width: '30%' },
+            { text: 'My Tashu', width: '65%' },
+            { text: 'My Tashu 💖', width: '100%' }
+        ];
+    
+        const interval = setInterval(() => {
+            loaderText.style.opacity = 0;
+    
             setTimeout(() => {
-                questionScreen.style.display = 'none';
-                successScreen.style.display = 'block';
-            }, 300);
-        });
+                loaderText.textContent = steps[step].text;
+                progress.style.width = steps[step].width;
+                loaderText.style.opacity = 1;
+                step++;
+    
+                if (step === steps.length) {
+                    clearInterval(interval);
+    
+                    setTimeout(() => {
+                        document.getElementById('loveLoader').style.display = 'none';
+                        successScreen.style.display = 'block';
+                        createCelebrationBurst();
+                    }, 600);
+                }
+            }, 400);
+        }, 900);
+    });
 
         const landingMusic = document.getElementById('landingMusic');
         const tryAgainSound = document.getElementById('tryAgainSound');
@@ -569,5 +640,16 @@
             moveNoButton();
         });
     </script>
+
+    <div id="loveLoader">
+      <div class="loader-box">
+        <div id="loaderText">Tashu</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="loader-sub">Loading my heart… 💕</p>
+      </div>
+    </div>
+
 </body>
 </html>
