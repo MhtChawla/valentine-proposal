@@ -307,7 +307,41 @@
             /* position: absolute; */
         }
 
+        .share-hint {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .share-text {
+            font-size: 1em;
+            color: #d63384;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        #shareBtn {
+            padding: 12px 28px;
+            font-size: 1em;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            background: linear-gradient(135deg, #25D366, #1ebe5d);
+            color: white;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        #shareBtn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6);
+        }
+
         .success-screen h1 {
+            color: #ff0066;
+        }
+        
+        .success-screen h4 {
             color: #ff0066;
         }
 
@@ -453,6 +487,14 @@
             </p>
             <div class="celebration-emoji">🐼</div>
             <div class="emoji-row" style="font-size: 45px;">✨ 💕 💖 💕 ✨</div>
+
+            <div class="share-hint">
+                <p class="share-text">
+                    📸 Take a screenshot of this moment<br>
+                    & tap below to send it to me on WhatsApp 💚
+                </p>
+                <button id="shareBtn">Share on WhatsApp 💌</button>
+            </div>
         </div>
     </div>
 
@@ -654,6 +696,20 @@
             e.preventDefault();
             moveNoButton();
         });
+
+        const shareBtn = document.getElementById('shareBtn');
+
+        shareBtn.addEventListener('click', () => {
+            const message = encodeURIComponent(
+                "I said YES 💕🐼\nYou’re officially my Valentine 😌❤️\nSharing this with you!"
+            );
+        
+            const phoneNumber = "91XXXXXXXXXX"; // ← your WhatsApp number
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+        
+            window.open(whatsappURL, "_blank");
+        });
+
     </script>
 
     <div id="loveLoader">
