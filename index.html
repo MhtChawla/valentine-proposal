@@ -618,37 +618,6 @@
         const questionScreen = document.getElementById('questionScreen');
         const successScreen = document.getElementById('successScreen');
 
-        let noBtnFloating = true;
-        let vx = 1.2; // horizontal speed
-        let vy = 1.0; // vertical speed;
-        
-        function floatNoButton() {
-            if (!noBtnFloating) return;
-        
-            const rect = noBtn.getBoundingClientRect();
-        
-            let x = rect.left + vx;
-            let y = rect.top + vy;
-        
-            // Bounce from edges
-            if (x <= 0 || x + rect.width >= window.innerWidth) vx *= -1;
-            if (y <= 0 || y + rect.height >= window.innerHeight) vy *= -1;
-        
-            // noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        
-            requestAnimationFrame(floatNoButton);
-        }
-        
-        // Start floating after buttons appear
-        setTimeout(() => {
-            const rect = noBtn.getBoundingClientRect();
-            noBtn.style.left = rect.left + 'px';
-            noBtn.style.top = rect.top + 'px';
-            floatNoButton();
-        }, 1200);
-
         // YES button - show success screen with celebration
         yesBtn.addEventListener('click', () => {
         landingMusic.pause();
