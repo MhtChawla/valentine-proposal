@@ -559,7 +559,7 @@
         <div class="success-screen" id="successScreen">
             <h4 class="h4-yay">🎉 Yayyyy! 🎉</h4>
             <p class="success-message">
-                Oh Tashu, looks like Valentine’s just got a lot better! I’m really glad you said yes ❤️<br>
+                My Gulabjamun My Tashu My Everything, <br>looks like Valentine’s just got a lot better! I’m really glad you said yes ❤️<br>
                 You're officially My Valentine Now! There's no turn back now!<br>
                 I'll be annoying you forever! 
             </p>
@@ -635,9 +635,9 @@
         let step = 0;
 
         const steps = [
-            { text: 'Tashu? No', width: '30%' },
+            { text: 'Tashu?', width: '30%' },
             { text: 'My Tashu', width: '65%' },
-            { text: 'My Tashu 💖!', width: '100%' }
+            { text: 'My Tashu 💖', width: '100%' }
         ];
         
         function updateLoader() {
@@ -734,24 +734,30 @@
 
         // NO button - move away on hover/touch with more dramatic effect
         function moveNoButton() {
+            // Play try-again sound
             tryAgainSound.currentTime = 0;
             tryAgainSound.play();
         
-            if (navigator.vibrate) navigator.vibrate(80);
+            // Mobile vibration (works on most Android devices)
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
         
-            const container = document.querySelector('.container');
-            const cRect = container.getBoundingClientRect();
-            const bRect = noBtn.getBoundingClientRect();
+            const maxX = window.innerWidth - noBtn.offsetWidth - 40;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 40;
         
-            const maxX = cRect.width - bRect.width - 20;
-            const maxY = cRect.height - bRect.height - 20;
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
         
-            const x = Math.random() * maxX;
-            const y = Math.random() * maxY;
+            // Shake effect before escape
+            noBtn.style.animation = 'shake 0.3s';
         
-            noBtn.style.position = 'absolute';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            setTimeout(() => {
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+                noBtn.style.animation = '';
+            }, 30);
         }
 
         // Add shake animation
